@@ -4,12 +4,14 @@ table.table.table-bordered#dttb1
   thead
     tr
       th Nombre Archivo
+      th Descripción Archivo
       th Opciones
 
   tbody
     - @archives.each do |archive|
       tr
         td = archive.name
+        td = archive.description
         td.custom-td
           .btn-group
             = link_to 'Ver', archive, class: 'btn btn-primary'
