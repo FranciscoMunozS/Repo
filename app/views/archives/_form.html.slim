@@ -1,0 +1,26 @@
+= simple_form_for(@archive) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    = f.input :name, label: 'Nombre Documento'
+    = f.input :description, label: 'Descripción del Documento'
+    = f.file_field :files, multiple: true
+
+
+    - if @archive.files.exists?
+      table.table
+        thead
+          tr
+            th Name
+            th Options
+        tbody
+          - @archive.files.each do |file|
+            tr
+              td= link_to file.filename
+              td= link_to 'Remove', delete_file_archive_path(file), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+
+  br
+
+  .form-actions
+    = f.button :submit, class: 'btn btn-primary'

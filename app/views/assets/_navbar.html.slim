@@ -1,0 +1,19 @@
+nav.navbar.navbar-expand-lg.navbar-light.bg-light
+  a.navbar-brand href="#"  Sistema Gestión de Archivos
+  button.navbar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarSupportedContent" data-toggle="collapse" type="button"
+    span.navbar-toggler-icon
+  #navbarSupportedContent.collapse.navbar-collapse
+    - if user_signed_in?
+      ul.navbar-nav.ml-auto
+        li.nav-item
+          a.nav-link href="/" Inicio
+        li.nav-item
+          = link_to current_user.email, edit_user_registration_path, class: 'nav-link'
+        li.nav-item
+          = link_to 'Cerrar Sesión', destroy_user_session_path, method: 'delete', class: 'nav-link'
+    - else
+      ul.navbar-nav.ml-auto
+        li.nav-item
+          a.nav-link href="/" Inicio
+        li.nav-item
+          = link_to 'Iniciar Sesión', new_user_session_path, class: 'nav-link'
