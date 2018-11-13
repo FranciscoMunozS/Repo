@@ -1,4 +1,10 @@
-h1 Sistema Gestión de Archivos
+.row
+  .col-md-6
+    .flot-left
+      h4 Sistema Gestión de Archivos
+  .col-md-6
+    .float-right
+      = link_to 'Crear Nuevo Archivo', new_archive_path, class: 'btn btn-primary'
 hr
 table.table.table-bordered#dttb1
   thead
@@ -9,16 +15,23 @@ table.table.table-bordered#dttb1
 
   tbody
     - @archives.each do |archive|
-      tr
-        td = archive.name
-        td = archive.description
-        td.custom-td
-          .btn-group
-            = link_to 'Ver', archive, class: 'btn btn-primary'
-            - if user_signed_in?
-              = link_to 'Editar', edit_archive_path(archive), class: 'btn btn-primary'
-              = link_to 'Eliminar', archive, data: { confirm: 'Esta seguro?' }, method: :delete, class: 'btn btn-primary'
-
-br
-
-= link_to 'Crear Nuevo Archivo', new_archive_path, class: 'btn btn-primary'
+      - if archive.status?
+        tr
+          td = archive.name
+          td = archive.description
+          td.custom-td
+            .btn-group
+              = link_to 'Ver', archive, class: 'btn btn-primary'
+              - if user_signed_in?
+                = link_to 'Editar', edit_archive_path(archive), class: 'btn btn-primary'
+                = link_to 'Eliminar', archive, data: { confirm: 'Esta seguro?' }, method: :delete, class: 'btn btn-primary'
+      - else
+        - if user_signed_in?
+          tr
+            td = archive.name
+            td = archive.description
+            td.custom-td
+              .btn-group
+                = link_to 'Ver', archive, class: 'btn btn-primary'
+                = link_to 'Editar', edit_archive_path(archive), class: 'btn btn-primary'
+                = link_to 'Eliminar', archive, data: { confirm: 'Esta seguro?' }, method: :delete, class: 'btn btn-primary'

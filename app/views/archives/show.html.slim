@@ -1,5 +1,5 @@
 p#notice = notice
-h3 Descripción del Archivo
+h4 Descripción del Archivo
 hr
 .row
   .col-md-12
@@ -11,6 +11,13 @@ hr
           = @archive.description
         - else
           p.text-center Sin descripción adjunta.
+        - if user_signed_in?
+          hr
+          | Estado archivo:
+          - if @archive.status?
+            |  Publicado
+          - else
+            |  Privado
 br
 h5 Archivos Adjuntos
 hr

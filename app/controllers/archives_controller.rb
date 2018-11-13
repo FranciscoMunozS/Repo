@@ -76,6 +76,6 @@ class ArchivesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def archive_params
-      params.require(:archive).permit(:name, :description, files: [])
+      params.require(:archive).permit(:name, :description, :status, files: [])
     end
 end
