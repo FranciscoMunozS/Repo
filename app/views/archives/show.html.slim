@@ -1,40 +1,85 @@
-p#notice = notice
-h4 Descripción del Archivo
-hr
-.row
-  .col-md-12
-    .card
-      h5.card-header
-        = @archive.name
-      .card-body
-        - if @archive.description?
-          = @archive.description
-        - else
-          p.text-center Sin descripción adjunta.
-        - if user_signed_in?
-          hr
-          | Estado archivo:
-          - if @archive.status?
-            |  Publicado
-          - else
-            |  Privado
-br
-h5 Archivos Adjuntos
-hr
-.row
-  .col-md-12
-    table.table.table-bordered#dttb2
-      thead
-        tr
-          th.text-center Nombre archivo
-          - if user_signed_in?
-            th.text-center Opciones
-      tbody
-        - @archive.files.each do |file|
-          tr
-            td.text-center= link_to file.filename, rails_blob_path(file, disposition: "attachment")
-            - if user_signed_in?
-              td.text-center= link_to 'Remover', delete_file_archive_path(file), method: :delete, data: { confirm: 'Esta seguro?' }, class: 'btn btn-danger'
-- if user_signed_in?
+- if @archive.status
+  p#notice = notice
+  h4 Descripción del Archivo
   hr
-  p.text-center= link_to 'Editar Archivo', edit_archive_path(@archive), class: 'btn btn-primary btn-block btn-lg'
+  .row
+    .col-md-12
+      .card
+        h5.card-header
+          = @archive.name
+        .card-body
+          - if @archive.description?
+            = @archive.description
+          - else
+            p.text-center Sin descripción adjunta.
+          - if user_signed_in?
+            hr
+            | Estado archivo:
+            - if @archive.status?
+              |  Publicado
+            - else
+              |  Privado
+  br
+  h5 Archivos Adjuntos
+  hr
+  .row
+    .col-md-12
+      table.table.table-bordered#dttb2
+        thead
+          tr
+            th.text-center Nombre archivo
+            - if user_signed_in?
+              th.text-center Opciones
+        tbody
+          - @archive.files.each do |file|
+            tr
+              td.text-center= link_to file.filename, rails_blob_path(file, disposition: "attachment")
+              - if user_signed_in?
+                td.text-center= link_to 'Remover', delete_file_archive_path(file), method: :delete, data: { confirm: 'Esta seguro?' }, class: 'btn btn-danger'
+  - if user_signed_in?
+    hr
+    p.text-center= link_to 'Editar Archivo', edit_archive_path(@archive), class: 'btn btn-primary btn-block btn-lg'
+- else
+  - if user_signed_in?
+    p#notice = notice
+    h4 Descripción del Archivo
+    hr
+    .row
+      .col-md-12
+        .card
+          h5.card-header
+            = @archive.name
+          .card-body
+            - if @archive.description?
+              = @archive.description
+            - else
+              p.text-center Sin descripción adjunta.
+            - if user_signed_in?
+              hr
+              | Estado archivo:
+              - if @archive.status?
+                |  Publicado
+              - else
+                |  Privado
+    br
+    h5 Archivos Adjuntos
+    hr
+    .row
+      .col-md-12
+        table.table.table-bordered#dttb2
+          thead
+            tr
+              th.text-center Nombre archivo
+              - if user_signed_in?
+                th.text-center Opciones
+          tbody
+            - @archive.files.each do |file|
+              tr
+                td.text-center= link_to file.filename, rails_blob_path(file, disposition: "attachment")
+                - if user_signed_in?
+                  td.text-center= link_to 'Remover', delete_file_archive_path(file), method: :delete, data: { confirm: 'Esta seguro?' }, class: 'btn btn-danger'
+    - if user_signed_in?
+      hr
+      p.text-center= link_to 'Editar Archivo', edit_archive_path(@archive), class: 'btn btn-primary btn-block btn-lg'
+  - else    
+   p Ups!, debe iniciar sesión para poder continuar.

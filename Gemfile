@@ -19,6 +19,7 @@ gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
 gem 'jquery-datatables', '~> 1.10', '>= 1.10.19.1'
 gem 'devise', '~> 4.5'
 gem 'devise-i18n'
+gem 'omniauth-google-oauth2'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
